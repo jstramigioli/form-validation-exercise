@@ -53,15 +53,104 @@ table {
     box-sizing: border-box;
   }
 
+#main-content {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	align-items: center;
+}
 
-#form input {
+#form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background-color: rgb(16, 118, 136);
+	padding: 3rem;
+	border-radius: 2rem;
+	width: 80%;
+	box-shadow: 8px 5px 22px 0px rgba(0,0,0,0.75);
+}
+
+h1 {
+	font-size: 2.2rem;
+	color: white;
+	margin-left: 15%;
+}
+
+.form-input {
+	display: flex;
+	height: 4rem;
+	width: 100%;
+	gap: 2rem;
+	align-items: center;
+}
+
+
+
+label {
+	display: block;
+	color: white;
+	width: 10%;
+	flex-grow: 0;
+}
+
+#form input, #form select {
 	border-color: black;
+	border-style: none;
+	height: 2rem;
+	border-radius: 10px;
+	background-color: white;
+	width: 60%;
+	flex-grow: 1;
+}
+
+#form select {
+	cursor: pointer;
+}
+
+#form input[disabled],
+#form input[type="submit"] {
+	background-color: rgb(194, 199, 202);
+	width: 100px;
+	margin-left: 70%;
 }
 
 #form .invalid {
-	border-color: brown;
+	
+	background-color: rgb(241, 162, 162);
 }
 
-#form .valid {
-	border-color: green;
+#form .valid,
+#form input[type="submit"].submit-ready {
+	background-color: rgb(165, 241, 162);
 }
+
+.error {
+	width: 20%;
+	color:  rgb(241, 162, 162);
+}
+
+
+
+/* This is to override the style that browser sets when autofill */
+input:-webkit-autofill.valid,
+input:-webkit-autofill:hover.valid,
+input:-webkit-autofill:focus.valid,
+select:-webkit-autofill.valid,
+select:-webkit-autofill:hover.valid,
+select:-webkit-autofill:focus.valid {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(165, 241, 162)  inset;
+}
+input:-webkit-autofill.invalid,
+input:-webkit-autofill:hover.invalid,
+input:-webkit-autofill:focus.invalid,
+select:-webkit-autofill.invalid,
+select:-webkit-autofill:hover.invalid
+select:-webkit-autofill:focus.invalid {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(241, 162, 162)  inset;
+}
+
+input[type="submit"] {
+	cursor: pointer;
+}
+

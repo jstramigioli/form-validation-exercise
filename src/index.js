@@ -20,7 +20,12 @@ const validateEmail = () => {
         emailError.textContent = 'Please enter a valid email adress'
     }
 }
-email.addEventListener('blur', validateEmail)
+email.addEventListener('blur', () => {
+    validateEmail()
+    checkIfCompleted()
+}
+    )
+
 email.addEventListener('focus', () => {
     email.classList.remove('valid', 'invalid')
     emailError.textContent = ""
@@ -53,8 +58,12 @@ countrySelect.addEventListener('change', function() {
     }
     validateZipCode()
     countrySelect.classList.add('valid')
+    checkIfCompleted()
 })
 
+countrySelect.addEventListener('focus', function() {
+    this.classList.remove('valid')
+})
 
 // zip code input
 import { postcodeValidator, postcodeValidatorExistsForCountry } from 'postcode-validator';
@@ -86,7 +95,11 @@ function validateZipCode() {
     }
 }
 
-zipCode.addEventListener('blur', validateZipCode)
+zipCode.addEventListener('blur', () => {
+    validateZipCode()
+    checkIfCompleted()
+})
+
 zipCode.addEventListener('focus', () => {
     zipCode.classList.remove('valid', 'invalid')
     zipCodeError.textContent = ""
@@ -150,6 +163,7 @@ password.addEventListener('blur', () => {
     if (validatePassword(password, passwordError)) {
         checkPassMatch()
     }  
+    checkIfCompleted()
 })
 password.addEventListener('focus', () => {
     password.classList.remove('valid', 'invalid')
@@ -163,7 +177,7 @@ confirmPassword.addEventListener('blur', () => {
     if (validatePassword(confirmPassword, confirmpasswordError)) {
         checkPassMatch()
     }
-   
+    checkIfCompleted()
 })
 confirmpasswordError.addEventListener('focus', () => {
     confirmPassword.classList.remove('valid', 'invalid')
@@ -187,4 +201,20 @@ function checkPassMatch() {
         password.classList.remove('invalid')
         password.classList.add('valid')
     }
+}
+
+// submit
+const submitBtn = document.querySelector('#submit')
+
+function checkIfCompleted() {
+    if (
+        email.classList.contains('valid') &&
+        countrySelect.classList.contains('valid') &&
+        zipCode.classList.contains('valid') &&
+        password.classList.contains('valid') &&
+        confirmPassword.classList.contains('valid')
+    )  {
+        submitBtn.classList.add('submit-ready')
+    }
+    else submitBtn.classList.remove('submit-ready')
 }
